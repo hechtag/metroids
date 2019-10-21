@@ -1,1 +1,3 @@
-<p>metronom works!</p>
+<button (click)="changeMetronom()">click</button>
+<input type="number" [(ngModel)]="beats" >
+<div width="200px" height="200px" [ngStyle]="{'background-color': isRed ? 'red' : 'white', 'height':'200px', 'width':'200px' } "></div>
