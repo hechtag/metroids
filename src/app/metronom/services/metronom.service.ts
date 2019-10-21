@@ -8,13 +8,25 @@ import { share, switchMap } from 'rxjs/operators';
 export class MetronomService {
 
   constructor() { }
-  private subject$ = new BehaviorSubject(1000);
+  private subject$: BehaviorSubject<number>;
 
-  getMetronom() {
-    return this.subject$.pipe(share(), switchMap(bpm => interval(bpm)))
+  getMetronom(beats: number) {
+    this.subject$ = new BehaviorSubject(beats)
+    return this.subject$.pipe(
+      share(), switchMap(
+        bpm => {
+          return interval(this.bpmToMiliseconds(bpm));
+        }
+      )
+    )
   };
 
   setBpm(beats: number) {
     this.subject$.next(beats);
   }
+
+  bpmToMiliseconds(bpm: number) {
+    return (bpm * -100) / 3 + 3000
+  }
+
 }

@@ -9,24 +9,26 @@ import { MetronomService } from '../services/metronom.service';
 })
 export class MetronomComponent implements OnInit {
   audio: HTMLAudioElement;
+  accent: HTMLAudioElement;
   isRed = false;
-  beats: number
+  beats: number = 60;
   constructor(
     private readonly metronomService: MetronomService
   ) { }
 
   ngOnInit() {
-    this.audio = new Audio();
-    this.audio.src = "../../assets/clickSound1.mp3";
-    this.audio.load();
-    this.metronomService.getMetronom().subscribe(() => {
+    this.audio = new Audio("../../assets/clickShortSilence1.mp3");
+    this.accent = new Audio("../../assets/clickShortSilenceHigh1.mp3");
+
+    this.metronomService.getMetronom(this.beats).subscribe(() => {
       this.clickSound();
     });
   }
 
   clickSound() {
     this.audio.play();
-    this.setRed();
+
+    // this.setRed();
   }
 
   changeMetronom() {

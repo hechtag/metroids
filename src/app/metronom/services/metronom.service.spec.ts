@@ -9,4 +9,12 @@ describe('MetronomService', () => {
     const service: MetronomService = TestBed.get(MetronomService);
     expect(service).toBeTruthy();
   });
+
+  it('should convert bpm to miliseconds', () => {
+    const service: MetronomService = TestBed.get(MetronomService);
+    expect(service.bpmToMiliseconds(30)).toBe(2000)
+    expect(service.bpmToMiliseconds(60)).toBe(1000)
+  });
+
+
 });
